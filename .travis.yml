@@ -46,6 +46,13 @@ addons:
       - ghostscript
       - cadaver
 
+before_install:
+  - wget https://s3.amazonaws.com/rebar3/rebar3
+  - chmod +x rebar3
+
+env:
+  - PATH=$PATH:.
+
 install:
   - autoreconf -vfi
 
@@ -57,3 +64,5 @@ script:
 
 after_script:
   - ./scripts/upload-travis-build-artifacts
+  - make clean
+  - rebar3 compile
